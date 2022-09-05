@@ -17,6 +17,7 @@ router.delete('/:Sku', (req, res) => {
    });
    res.send(productos);
 });
+
 router.post('/', (req, res) => {
     const { Nombre, Precio,URL, Marca, Iva, Inventario}  = req.body;
     if(Nombre && Precio && URL && Marca && Iva && Inventario){
