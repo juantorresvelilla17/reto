@@ -41,18 +41,18 @@ router.get('/:Sku', (req, res) => {
     res.json(producto);
 });
 
-/*router.put('/:Sku', (req, res) => {
+router.put('/:Sku', (req, res) => {
     const {Sku} = req.params;
     const { Nombre, Precio, URL, Marca, Iva, Inventario}  = req.body;
     if(Nombre && Precio && URL && Marca && Iva && Inventario){
         _.each(productos, (producto, i) => {
             if(producto.Sku == Sku){
-                producto.Nombre = nombre;
-                producto.Precio = precio;
-                producto.URL = url;
-                producto.Marca = marca;
-                producto.Iva = iva;
-                producto.Inventario = inventario;                
+                producto.Nombre = Nombre;
+                producto.Precio = Precio;
+                producto.URL = URL;
+                producto.Marca = Marca;
+                producto.Iva = Iva;
+                producto.Inventario = Inventario;                
             }
            });
            res.send('Actualizado');
@@ -61,9 +61,7 @@ router.get('/:Sku', (req, res) => {
         res.status(500).json({error: 'No actualizado'});
     }
 
-
-});*/
-
+});
 
 
 
