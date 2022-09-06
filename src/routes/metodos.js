@@ -1,12 +1,13 @@
 const { Router } = require('express');
 const router = Router();
+const _ = require('underscore');
 
 const productos = require('../Productos.json');
 
 
 router.get('/', (req, res) => {
     res.json(productos);
-})
+});
 
 router.post('/', (req, res) => {
     const { Nombre, Precio,URL, Marca, Iva, Inventario}  = req.body;
@@ -29,5 +30,39 @@ router.delete('/:Sku', (req, res) => {
    });
    res.send('deleted');
 });
+
+router.get('/:Sku', (req, res) => {
+    const {Sku} = req.params;
+    _.each(productos, (producto, i) => {
+        if(producto.Sku == Sku){
+            res.json(producto);
+        }
+    });
+    res.json(producto);
+});
+
+router.put('/:Sku', (req, res) => {
+    const {Sku} = req.params;
+    const { Nombre, Precio, URL, Marca, Iva, Inventario}  = req.body;
+    if(Nombre && Precio && URL && Marca && Iva && Inventario){
+        _.each(productos, (producto, i) => {
+            if(producto.Sku == Sku){
+                producto.Nombre = Nombre;
+                producto.Precio = Precio;
+                producto.URL = URL;
+                producto.Marca = Marca;
+                producto.Iva = Iva;
+                producto.Inventario = Inventario;                
+            }
+           });
+           res.send('Actualizado');
+           //res.json(productos);
+    }else{
+        res.status(500).json({error: 'No actualizado'});
+    }
+
+});
+
+
 
 module.exports = router;
